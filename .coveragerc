@@ -1,0 +1,3 @@
+[report]
+omit =
+    jms_utils/_version.py

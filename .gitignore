@@ -1,0 +1,16 @@
+
+*.pyc
+
+*.egg
+
+.cache
+
+.coverage
+
+build
+
+cover
+
+dist
+
+JMS_Utils.egg-info
