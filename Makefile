@@ -2,6 +2,7 @@ clean:
 	python dev/clean.py
 
 deploy: pypi
+	git push
 	git push --tags
 	twine upload dist/*
 	clean
