@@ -28,4 +28,4 @@ def test_make_compat_str():
     byte_str = b"Give me some bytes"
     assert isinstance(make_compat_str(byte_str), unicode)
     assert isinstance(make_compat_str('Another string'), unicode)
-    assert isinstance(make_compat_str(), unicode)
+    assert isinstance(make_compat_str(u'unicode string'), unicode)
