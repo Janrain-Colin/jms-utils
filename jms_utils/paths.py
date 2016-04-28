@@ -41,8 +41,13 @@ app_cwd = warn()
 
 
 class ChDir(object):
-    # Step into a directory temporarily. Then return to
-    # orignal directory.
+    """Used as a context manager to step into a directory
+    do some work then return to the original directory.
+
+    Args:
+
+        path (str): Absolute path to directory you want to change to
+    """
     def __init__(self, path):
         self.old_dir = os.getcwd()
         self.new_dir = path
