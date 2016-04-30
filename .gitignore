@@ -14,3 +14,5 @@ cover
 dist
 
 JMS_Utils.egg-info
+
+hash-test.txt

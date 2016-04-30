@@ -33,9 +33,9 @@ from jms_utils.app import _app_cwd
 log = logging.getLogger(__name__)
 
 
-# ToDo: Remove in v1.0
+# ToDo: Remove in v2.0
 def warn():
-    warnings.warn('Will be remove in v1.0: app_cwd moved to jms_utils.app.app_cwd',
+    warnings.warn('Will be remove in v2.0: app_cwd moved to jms_utils.app.app_cwd',
                   DeprecationWarning)
     return _app_cwd()
 

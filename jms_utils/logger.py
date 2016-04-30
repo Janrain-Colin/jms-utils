@@ -22,23 +22,8 @@
 # THE SOFTWARE.
 # --------------------------------------------------------------------------
 import logging
-import warnings
 
 
 logging_formatter = logging.Formatter(u'[%(levelname)s] %(name)s '
                                       u'%(lineno)d: %(message)s')
 
-
-# ToDo: Remove in v1.0
-def log_formatter():
-    warnings.warn(u'Will be deprecated in v1.0: Use logging_formatter',
-                  DeprecationWarning)
-    return logging_formatter
-# End ToDo
-
-# ToDo: Remove in v1.0
-def log_format_string():
-    warnings.warn(u'Will be deprecated in v1.0: Use logging_formatter',
-                  DeprecationWarning)
-    return logging_formatter
-# End ToDo

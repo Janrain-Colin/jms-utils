@@ -23,7 +23,14 @@
 # --------------------------------------------------------------------------
 import os
 
-from jms_utils.paths import ChDir
+from jms_utils.paths import ChDir, get_mac_dot_app_dir
+
+
+def test_get_mac_app_dir():
+        main = 'Main'
+        path = os.path.join(main, 'Contents', 'MacOS', 'app')
+        assert get_mac_dot_app_dir(path) == main
+
 
 
 def test_chdir(cleandir):

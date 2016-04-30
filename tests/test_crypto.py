@@ -21,8 +21,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 # --------------------------------------------------------------------------
+from __future__ import unicode_literals
+import io
+
 from jms_utils.crpyto import get_package_hashes
 
 
-def test_get_package_hashes():
-    pass
+def test_package_hash():
+    with io.open('hash-test.txt', 'w', encoding='utf-8') as f:
+        f.write('I should find some lorem text' * 123)
+
+    digest = ('cb44ec613a594f3b20e46b768c5ee780e0a9b66ac'
+              '6d5ac1468ca4d3635c4aa9b')
+    assert digest == get_package_hashes('hash-test.txt')
