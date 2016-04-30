@@ -42,6 +42,19 @@ def warn():
 app_cwd = warn()
 # End ToDo
 
+def get_mac_dot_app_dir(directory):
+    """Returns parent directory of mac .app
+
+    Args:
+
+       directory (str): Current directory
+
+    Returns:
+
+       (str): Parent directory of mac .app
+    """
+    return os.path.dirname(os.path.dirname(os.path.dirname(directory)))
+
 
 def remove_any(path):
 
