@@ -21,11 +21,45 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 # --------------------------------------------------------------------------
-from jms_utils.compat import make_compat_str
+import sys
+import traceback
 
 
-def test_make_compat_str():
-    byte_str = b"Give me some bytes"
-    assert isinstance(make_compat_str(byte_str), unicode)
-    assert isinstance(make_compat_str('Another string'), unicode)
-    assert isinstance(make_compat_str(u'unicode string'), unicode)
+class STDError(Exception):
+    """Extends exceptions to show added message if error isn't expected.
+
+    Args:
+
+        msg (str): error message
+
+    Kwargs:
+
+        tb (obj): is the original traceback so that it can be printed.
+
+        expected (bool):
+
+            Meaning:
+
+                True - Report issue msg not shown
+
+                False - Report issue msg shown
+    """
+    def __init__(self, msg, tb=None, expected=False):
+        if expected is False:
+            msg = msg + ('; please report this issue on https://github.com'
+                         '/JMSwag/jms-utils/issues')
+        super(STDError, self).__init__(msg)
+
+        self.traceback = tb
+        self.exc_info = sys.exc_info()  # preserve original exception
+
+    def format_traceback(self):
+        if self.traceback is None:
+            return None
+        return ''.join(traceback.format_tb(self.traceback))
+
+
+class VersionError(STDError):
+    """Raised for Utils exceptions"""
+    def __init__(self, *args, **kwargs):
+        super(VersionError, self).__init__(*args, **kwargs)

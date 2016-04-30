@@ -21,11 +21,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 # --------------------------------------------------------------------------
-from jms_utils.compat import make_compat_str
+from jms_utils.crpyto import get_package_hashes
 
 
-def test_make_compat_str():
-    byte_str = b"Give me some bytes"
-    assert isinstance(make_compat_str(byte_str), unicode)
-    assert isinstance(make_compat_str('Another string'), unicode)
-    assert isinstance(make_compat_str(u'unicode string'), unicode)
+def test_get_package_hashes():
+    pass

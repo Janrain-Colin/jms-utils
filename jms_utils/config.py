@@ -21,11 +21,36 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 # --------------------------------------------------------------------------
-from jms_utils.compat import make_compat_str
+class ConfigDict(dict):
+    def __init__(self, *args, **kwargs):
+        super(ConfigDict, self).__init__(*args, **kwargs)
+        self.__dict__ = self
+        default = kwargs.get('default', {})
+        assert isinstance(default, dict)
+        self.update(default)
 
+    def update(self, data):
+        _data = {}
+        for k, v in data.items():
+            if k.isupper():
+                _data[k] = v
+        super(ConfigDict, self).update(_data)
 
-def test_make_compat_str():
-    byte_str = b"Give me some bytes"
-    assert isinstance(make_compat_str(byte_str), unicode)
-    assert isinstance(make_compat_str('Another string'), unicode)
-    assert isinstance(make_compat_str(u'unicode string'), unicode)
+    def from_object(self, obj):
+        """Updates the values from the given object
+
+        Args:
+
+            obj (instance): Object with config attributes
+
+        Objects are classes.
+
+        Just the uppercase variables in that object are stored in the config.
+        Example usage::
+
+            from yourapplication import default_config
+            app.config.from_object(default_config())
+        """
+        for key in dir(obj):
+            if key.isupper():
+                self[key] = getattr(obj, key)

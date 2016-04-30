@@ -21,11 +21,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 # --------------------------------------------------------------------------
-from jms_utils.compat import make_compat_str
+from jms_utils.config import ConfigDict
 
+def test_config_dict():
+    default = {
+        'APP_NAME': 'test',
+        'COMPANY_NAME': 'acme',
+        'bad_config': 'bad boy'
+        }
+    config = ConfigDict(default=default)
 
-def test_make_compat_str():
-    byte_str = b"Give me some bytes"
-    assert isinstance(make_compat_str(byte_str), unicode)
-    assert isinstance(make_compat_str('Another string'), unicode)
-    assert isinstance(make_compat_str(u'unicode string'), unicode)
+    assert config['APP_NAME'] == 'test'
+    assert config['COMPANY_NAME'] == 'acme'
+    assert 'bad_config' not in config.keys()

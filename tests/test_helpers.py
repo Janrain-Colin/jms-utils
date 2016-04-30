@@ -21,11 +21,36 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 # --------------------------------------------------------------------------
-from jms_utils.compat import make_compat_str
+import pytest
+
+from jms_utils.exceptions import VersionError
+from jms_utils.helpers import EasyAccessDict, Version
 
 
-def test_make_compat_str():
-    byte_str = b"Give me some bytes"
-    assert isinstance(make_compat_str(byte_str), unicode)
-    assert isinstance(make_compat_str('Another string'), unicode)
-    assert isinstance(make_compat_str(u'unicode string'), unicode)
+class TestVerson(object):
+    def test_version_short(self):
+        assert Version('1.1') > Version('1.1beta1')
+        assert Version('1.2.1beta1') < Version('1.2.1')
+        assert Version('1.2.1alpha1') < Version('1.2.1alpha2')
+
+    def test_version_full(self):
+        assert Version('1.1') > Version('1.1b1')
+        assert Version('1.2.1b1') < Version('1.2.1')
+        assert Version('1.2.1a1') < Version('1.2.1a2')
+
+    def test_version(self):
+        assert Version('5.0') == Version('5.0')
+        assert Version('4.5') != Version('5.1')
+        with pytest.raises(VersionError):
+            Version('1')
+        with pytest.raises(VersionError):
+            Version('1.1.1.1')
+
+
+class TestEasyAccessDict(object):
+
+    def test_easy_access(self):
+        key = 'carson*da*park'
+        data = {'carson': {'da': {'park': 'mills'}}}
+        easy_data = EasyAccessDict(data)
+        assert 'mills' == easy_data.get(key)

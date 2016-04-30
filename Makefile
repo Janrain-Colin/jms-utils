@@ -16,10 +16,10 @@ deps-upgrade:
 	pip install -r dev/requirements.txt --upgrade
 
 pypi:
-	python setup.py sdist upload -r pypi
+	python setup.py sdist
 
 register:
 	python setup.py register -r pypi
 
 test: clean
-	tox
+	py.test

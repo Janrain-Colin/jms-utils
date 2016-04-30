@@ -23,6 +23,9 @@
 # --------------------------------------------------------------------------
 import logging
 import os
+import shutil
+import sys
+import time
 import warnings
 
 from jms_utils.app import _app_cwd
@@ -38,6 +41,32 @@ def warn():
 
 app_cwd = warn()
 # End ToDo
+
+
+def remove_any(path):
+
+    def _remove_any(x):
+        if os.path.isdir(x):
+            shutil.rmtree(x, ignore_errors=True)
+        else:
+            os.remove(path)
+
+    if sys.platform != 'win32':
+        _remove_any(path)
+    else:
+        for _ in range(100):
+            try:
+                _remove_any(path)
+            except Exception as err:
+                log.debug(err, exc_info=True)
+                time.sleep(0.01)
+            else:
+                break
+        else:
+            try:
+                _remove_any(path)
+            except Exception as err:
+                log.debug(err, exc_info=True)
 
 
 class ChDir(object):

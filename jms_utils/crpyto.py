@@ -21,11 +21,28 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 # --------------------------------------------------------------------------
-from jms_utils.compat import make_compat_str
+import hashlib
+import logging
+import os
 
+log = logging.getLogger(__name__)
 
-def test_make_compat_str():
-    byte_str = b"Give me some bytes"
-    assert isinstance(make_compat_str(byte_str), unicode)
-    assert isinstance(make_compat_str('Another string'), unicode)
-    assert isinstance(make_compat_str(u'unicode string'), unicode)
+def get_package_hashes(filename):
+    """Provides hash of given filename.
+
+    Args:
+
+        filename (str): Name of file to hash
+
+    Returns:
+
+        (str): sha256 hash
+    """
+    log.debug('Getting package hashes')
+    filename = os.path.abspath(filename)
+    with open(filename, 'rb') as f:
+        data = f.read()
+
+    _hash = hashlib.sha256(data).hexdigest()
+    log.debug('Hash for file %s: %s', filename, _hash)
+    return _hash
