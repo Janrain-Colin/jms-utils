@@ -26,13 +26,3 @@ import logging
 
 logging_formatter = logging.Formatter(u'[%(levelname)s] %(name)s '
                                       u'%(lineno)d: %(message)s')
-
-# ToDo: Remove in v2.0
-def log_formatter():
-    return logging_formatter
-# End ToDo
-
-# ToDo: Remove in v2.0
-def log_format_string():
-    return logging_formatter
-# End ToDo
