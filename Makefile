@@ -18,4 +18,4 @@ register:
 	python setup.py register -r pypi
 
 test: clean
-	py.test
+	tox

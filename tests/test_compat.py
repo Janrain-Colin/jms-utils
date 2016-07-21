@@ -21,11 +21,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 # --------------------------------------------------------------------------
+import six
+
 from jms_utils.compat import make_compat_str
 
 
 def test_make_compat_str():
     byte_str = b"Give me some bytes"
-    assert isinstance(make_compat_str(byte_str), unicode)
-    assert isinstance(make_compat_str('Another string'), unicode)
-    assert isinstance(make_compat_str(u'unicode string'), unicode)
+    assert isinstance(make_compat_str(byte_str), six.string_types)
+    assert isinstance(make_compat_str('Another string'), six.string_types)
+    assert isinstance(make_compat_str(u'unicode string'), six.string_types)

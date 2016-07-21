@@ -24,7 +24,7 @@
 from __future__ import unicode_literals
 import io
 
-from jms_utils.crpyto import get_package_hashes
+from jms_utils.crypto import get_package_hashes
 
 
 def test_package_hash():
