@@ -180,8 +180,8 @@ class Version(object):
             self.release = 0
             self.channel = 'alpha'
         else:
-            log.warning('Setting release as stable. '
-                        'Disregard if not prerelease')
+            log.debug('Setting release as stable. '
+                      'Disregard if not prerelease')
             # Marking release as stable
             self.release = 2
 
@@ -222,7 +222,7 @@ class Version(object):
         if count not in [1, 2, 4]:
             msg = ('Incorrect version format. 1 or 2 dots '
                    'You have {} dots'.format(count))
-            log.error(msg)
+            log.debug(msg)
             raise VersionError(msg)
         return count
 
