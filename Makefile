@@ -8,10 +8,6 @@ deploy: pypi
 	clean
 
 deps:
-	pip install -r requirements.txt
-	pip install -r dev/requirements.txt
-
-deps-upgrade:
 	pip install -r requirements.txt --upgrade
 	pip install -r dev/requirements.txt --upgrade
 
