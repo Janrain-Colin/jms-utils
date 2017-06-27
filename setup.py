@@ -10,9 +10,9 @@ setup(
     description='Various utility functions',
     author='Johny Mo Swag',
     author_email='johnymoswag@gmail.com',
-    url='https://github.com/JohnyMoSwag/jms-utils',
-    download_url=('https://github.com/JohnyMoSwag/jms'
-                  '-utils/archive/master.zip'),
+    url='https://github.com/JMSwag/jms-utils',
+    download_url=('https://github.com/JMSwag/jms-utils'
+                  '/archive/master.zip'),
     license='MIT',
     cmdclass=versioneer.get_cmdclass(),
     install_requires=[
